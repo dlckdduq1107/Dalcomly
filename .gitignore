@@ -1,3 +1,14 @@
 /node_modules/
 .DS_Store
 /dist/
+/.next/
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
