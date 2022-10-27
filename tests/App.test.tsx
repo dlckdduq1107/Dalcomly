@@ -5,7 +5,7 @@ import HomePage from '../pages/index';
 it('Welcome message를 보여준다.', () => {
   render(<HomePage />);
   const element = screen.getByRole('link', {
-    name: 'Welcome to Next.js!',
+    name: '전체 물품 리스트',
   });
   expect(element).toBeInTheDocument();
 });
