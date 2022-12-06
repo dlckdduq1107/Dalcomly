@@ -6,7 +6,8 @@ interface ProductResponseWrapper {
   productList: ProductResponse;
 }
 
-function HomePage(props: ProductResponseWrapper) {
+//TODO: props타입을 설정해야함
+function HomePage(props: any) {
   const { productList } = props;
   return (
     <BodyWrapper>
