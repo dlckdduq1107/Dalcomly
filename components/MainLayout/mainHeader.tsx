@@ -8,6 +8,10 @@ function MainHeader() {
       <Link href='/'>
         <Image src='/assets/images/metaRabbit.png' width={50} height={50} />
       </Link>
+      <SearchWrapper>
+        <SearchInput />
+        <SearchBtn>search</SearchBtn>
+      </SearchWrapper>
       <MenuWrapper>
         <Link href='/menu1'>menu1</Link>
         <Link href='/menu2'>menu2</Link>
@@ -19,7 +23,7 @@ function MainHeader() {
 const Header = styled.header`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: skyblue;
   margin-bottom: 20px;
@@ -31,9 +35,19 @@ const Header = styled.header`
 `;
 const MenuWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  ainer-align: center;
-  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
   margin: 15px;
 `;
+const SearchWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-left: 100px;
+  width: 50%;
+`;
+const SearchInput = styled.input`
+  width: 100%;
+`;
+const SearchBtn = styled.button``;
 export default MainHeader;
