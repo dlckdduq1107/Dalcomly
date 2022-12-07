@@ -25,6 +25,9 @@ const Header = styled.header`
   margin-bottom: 20px;
   border-radius: 0px 0px 20px 20px;
   padding: 20px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 `;
 const MenuWrapper = styled.div`
   display: flex;

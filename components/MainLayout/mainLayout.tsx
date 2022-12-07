@@ -15,5 +15,6 @@ function MainLayout(props: any) {
 export default MainLayout;
 
 const Main = styled.main`
+  margin-top: 100px;
   height: 100vh;
 `;
