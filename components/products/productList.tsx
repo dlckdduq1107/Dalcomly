@@ -8,7 +8,12 @@ function ProductList(props: any) {
       <Title>{title}</Title>
       <ItemWrapper>
         {productList.map((product: any) => (
-          <ProductItem imgPath={product.imgPath} />
+          <ProductItem
+            imgPath={product.imgPath}
+            id={product.id}
+            productName={product.productName}
+            key={product.id}
+          />
         ))}
       </ItemWrapper>
     </ProductsWrapper>
