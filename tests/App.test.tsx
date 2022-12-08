@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import HomePage from '../pages/index';
-import ProductPage from '../pages/products';
+import ProductPage from '../pages/product';
 
 const props = {
   productList: [
