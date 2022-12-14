@@ -13,10 +13,15 @@ function ProductDetailPage(props: any) {
   }, []);
 
   const getProductDetail = async () => {
-    const data = await fetch(`http://localhost:3000/api/product/${router.query.id}`);
-    const result = await data.json();
-    setProductDetail(result);
-    setLoading(true);
+    try {
+      const data = await fetch(`/api/product/${router.query.id}`);
+      const result = await data.json();
+      setProductDetail(result);
+      setLoading(true);
+    } catch (err) {
+      console.log('에러 발생', err);
+      setLoading(false);
+    }
   };
 
   if (!isLoading) return <p>Loading...</p>;
