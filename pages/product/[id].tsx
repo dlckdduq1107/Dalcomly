@@ -1,38 +1,38 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import ProductItem from '../../components/products/productItem';
-import { EachProduct } from '../api/products';
 
 function ProductDetailPage(props: any) {
-  const router = useRouter();
-  const [productDetail, setProductDetail] = useState<EachProduct | null>(null);
-  const [isLoading, setLoading] = useState(false);
+  const { imgPath, id, productName } = props;
+  return <ProductItem imgPath={imgPath} id={id} productName={productName} />;
+}
 
-  useEffect(() => {
-    getProductDetail();
-  }, []);
-
-  const getProductDetail = async () => {
-    try {
-      const data = await fetch(`/api/product/${router.query.id}`);
-      const result = await data.json();
-      setProductDetail(result);
-      setLoading(true);
-    } catch (err) {
-      console.log('에러 발생', err);
-      setLoading(false);
-    }
+export async function getStaticPaths() {
+  const reponse = await fetch('http://localhost:3000/api/products');
+  const result = await reponse.json();
+  const productPath = result.productList.map((val: any) => {
+    return {
+      params: {
+        id: val.id.toString(),
+      },
+    };
+  });
+  return {
+    paths: [...productPath],
+    fallback: 'blocking',
   };
+}
 
-  if (!isLoading) return <p>Loading...</p>;
-
-  return (
-    <ProductItem
-      imgPath={productDetail?.imgPath}
-      id={productDetail?.id}
-      productName={productDetail?.productName}
-    />
-  );
+export async function getStaticProps(props: any) {
+  const { id } = props.params;
+  const data = await fetch(`http://localhost:3000/api/product/${id}`);
+  const result = await data.json();
+  console.log(result);
+  return {
+    props: {
+      id: result.id,
+      productName: result.productName,
+      imgPath: result.imgPath,
+    },
+  };
 }
 
 export default ProductDetailPage;
