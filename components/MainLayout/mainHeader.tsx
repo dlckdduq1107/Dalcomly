@@ -6,7 +6,9 @@ function MainHeader() {
   return (
     <Header>
       <Link href='/'>
-        <Image src='/assets/images/metaRabbit.png' width={50} height={50} />
+        <a>
+          <Image src='/assets/images/metaRabbit.png' width={50} height={50} />
+        </a>
       </Link>
       <SearchWrapper>
         <SearchInput />

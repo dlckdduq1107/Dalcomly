@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import HomePage from '../pages/index';
-import ProductPage from '../pages/products';
+import ProductPage from '../pages/product';
+import ProductDetailPage from '../pages/product/[id]';
 
 const props = {
   productList: [
@@ -19,8 +20,8 @@ it('메인 페이지를 보여준다.', () => {
   expect(weeklyHotElement).toBeInTheDocument();
 });
 
-it('Product Page를 보여준다.', () => {
-  // render(<ProductPage data={productList} />);
-  // const element = screen.getAllByRole('img');
-  // expect(element).toHaveLength(2);
+it('Product Detail Page에서 상품 상세정보를 보여준다.', () => {
+  render(<ProductDetailPage {...props.productList[0]} />);
+  const element = screen.getByText('clothes1');
+  expect(element).toBeInTheDocument();
 });
