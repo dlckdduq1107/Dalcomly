@@ -16,5 +16,5 @@ export default MainLayout;
 
 const Main = styled.main`
   margin-top: 100px;
-  height: 100vh;
+  height: 100%;
 `;
