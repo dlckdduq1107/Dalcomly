@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import ProductDetailPage from '../pages/product/[id]';
 import { products } from '../util/dummyData';
 
@@ -31,4 +32,14 @@ it('Product Detail Page - 구매버튼 존재', () => {
 it('Product Detail Page - 장바구니 버튼 존재', () => {
   const cartBtn = screen.getByRole('cart-btn');
   expect(cartBtn).toBeInTheDocument();
+});
+
+it('Product Detail Page - 상품 디테일 클릭시 정보 변경(상세정보 -> 유의사항)', async () => {
+  const detailImg = screen.getByAltText('detailInfo');
+  expect(detailImg).toBeInTheDocument();
+  expect(screen.queryByAltText('cautionInfo')).not.toBeInTheDocument();
+
+  const cautionBtn = screen.getByRole('caution-info');
+  userEvent.click(cautionBtn);
+  expect(await screen.findByAltText('cautionInfo')).toBeInTheDocument();
 });
