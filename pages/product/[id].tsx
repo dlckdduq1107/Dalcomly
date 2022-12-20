@@ -5,43 +5,53 @@ import styled from 'styled-components';
 function ProductDetailPage(props: any) {
   const { imgPath, id, productName, price, cautionPath } = props;
   const [productContent, setProductContent] = useState<string>(imgPath);
-  const [selectDetail, setSelectDetail] = useState<string>('상세정보');
+  const [selectDetail, setSelectDetail] = useState<string>('detailInfo');
 
   const onClickDetail = (e: React.MouseEvent<HTMLInputElement>) => {
-    const text = e.currentTarget.textContent;
+    const text = e.currentTarget.textContent as string;
+
     if (text === '상세정보') {
       setProductContent(imgPath);
+      setSelectDetail('detailInfo');
     } else if (text === '유의사항') {
       setProductContent(cautionPath);
+      setSelectDetail('cautionInfo');
     }
-    setSelectDetail(text as string);
   };
 
   return (
     <ProductDetailWrapper>
       <ProductMainWrapper>
-        <Image src={imgPath} width={450} height={450} />
+        <Image alt='detail-img' src={imgPath} width={450} height={450} />
         <ProductDetailText>
           <ProductTitle>{productName}</ProductTitle>
           <ProductPrice>{`${price.toLocaleString('ko-KR')}원`}</ProductPrice>
           <OptionWrapper>options</OptionWrapper>
           <BtnWrapper>
-            <BuyBtn>구매하기</BuyBtn>
-            <CartBtn>장바구니</CartBtn>
+            <BuyBtn role='buy-btn'>구매하기</BuyBtn>
+            <CartBtn role='cart-btn'>장바구니</CartBtn>
           </BtnWrapper>
         </ProductDetailText>
       </ProductMainWrapper>
       <ProductBodyWrapper>
         <ProductBodyOption>
-          <Detail color={selectDetail === '상세정보' ? '#5F5F5F' : 'gray'} onClick={onClickDetail}>
+          <Detail
+            color={selectDetail === 'detailInfo' ? '#5F5F5F' : 'gray'}
+            onClick={onClickDetail}
+            role='detail-info'
+          >
             상세정보
           </Detail>
-          <Caution color={selectDetail === '유의사항' ? '#5F5F5F' : 'gray'} onClick={onClickDetail}>
+          <Caution
+            color={selectDetail === 'cautionInfo' ? '#5F5F5F' : 'gray'}
+            onClick={onClickDetail}
+            role='caution-info'
+          >
             유의사항
           </Caution>
         </ProductBodyOption>
         <ProductBodyDetail>
-          <Image src={productContent} width={1000} height={4500} />
+          <Image alt={selectDetail} src={productContent} width={1000} height={4500} />
         </ProductBodyDetail>
       </ProductBodyWrapper>
     </ProductDetailWrapper>
