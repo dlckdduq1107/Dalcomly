@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Carousel from '../../components/carousel';
 
 function ProductDetailPage(props: any) {
-  const { imgPath, id, productName, price, cautionPath } = props;
+  const { imgPath, id, productName, price, cautionPath, detailImages } = props;
   const [productContent, setProductContent] = useState<string>(imgPath);
   const [selectDetail, setSelectDetail] = useState<string>('detailInfo');
 
@@ -22,7 +23,7 @@ function ProductDetailPage(props: any) {
   return (
     <ProductDetailWrapper>
       <ProductMainWrapper>
-        <Image alt='detail-img' src={imgPath} width={450} height={450} />
+        <Carousel imgPaths={detailImages} width={450} height={450} />
         <ProductDetailText>
           <ProductTitle>{productName}</ProductTitle>
           <ProductPrice>{`${price.toLocaleString('ko-KR')}원`}</ProductPrice>
@@ -69,6 +70,7 @@ export async function getServerSideProps(props: any) {
       imgPath: result.imgPath,
       price: result.price,
       cautionPath: result.cautionPath,
+      detailImages: result.detailImages,
     },
   };
 }
@@ -80,7 +82,7 @@ const ProductDetailWrapper = styled.div`
 `;
 const ProductDetailText = styled.div`
   margin-left: 30px;
-  width: 100%;
+  width: 50%;
 `;
 const ProductTitle = styled.div`
   font-size: 40px;
@@ -90,7 +92,7 @@ const ProductPrice = styled.div``;
 const BtnWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 20%;
+  height: 10%;
   position: bottom;
 `;
 const BuyBtn = styled.button`
