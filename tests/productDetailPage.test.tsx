@@ -60,4 +60,16 @@ describe('상품 이미지 캐러셀 테스트', () => {
   // wait for은 컴포넌트가 업데이트 될때 까지 기다려줌
   // 근데 find~를 await랑 같이 쓰면 동일하지 않나?
   // find는 해당 요소가 있을때까지 찾아준다.
+
+  it('두번째 이미지에서 이전 버튼 클릭시 첫번째 이미지로 변경', async () => {
+    const nextBtn = screen.getByRole('next-img-btn');
+    await userEvent.click(nextBtn);
+    expect(await screen.findByAltText('img-1')).toHaveClass('active');
+    expect(await screen.findByAltText('img-0')).not.toHaveClass('active');
+
+    const prevBtn = screen.getByRole('prev-img-btn');
+    await userEvent.click(prevBtn);
+    expect(await screen.findByAltText('img-0')).toHaveClass('active');
+    expect(await screen.findByAltText('img-1')).not.toHaveClass('active');
+  });
 });
