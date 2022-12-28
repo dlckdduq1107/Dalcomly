@@ -84,4 +84,16 @@ describe('상품 이미지 캐러셀 테스트', () => {
 
     expect(await screen.findByAltText('img-8')).toHaveClass('active');
   });
+
+  it('마지막 이미지에서 다음 버튼 클릭시 처음 이미지로 변경', async () => {
+    //이전 버튼 클릭으로 마지막 이미지로 이동
+    const prevBtn = screen.getByRole('prev-img-btn');
+    await userEvent.click(prevBtn);
+    expect(await screen.findByAltText('img-0')).not.toHaveClass('active');
+
+    const nextBtn = screen.getByRole('next-img-btn');
+    await userEvent.click(nextBtn);
+
+    expect(await screen.findByAltText('img-0')).toHaveClass('active');
+  });
 });
