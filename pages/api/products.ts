@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { products } from '../../util/dummyData';
 
 export interface ProductResponse {
   productList: Array<EachProduct>;
@@ -11,10 +12,5 @@ export interface EachProduct {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<ProductResponse>) {
-  res.status(200).json({
-    productList: [
-      { id: 1, productName: 'clothes1', imgPath: '/assets/images/metaRabbit.png' },
-      { id: 2, productName: 'hat', imgPath: '/assets/images/testImg2.png' },
-    ],
-  });
+  res.status(200).json(products);
 }
