@@ -19,11 +19,6 @@ it('Product Detail Page - 가격을 보여준다', () => {
   expect(element).toBeInTheDocument();
 });
 
-it('Product Detail Page - 상품 이미지를 보여준다', () => {
-  const element = screen.getByAltText('detail-img');
-  expect(element).toBeInTheDocument();
-});
-
 it('Product Detail Page - 구매버튼 존재', () => {
   const buyBtn = screen.getByRole('buy-btn');
   expect(buyBtn).toBeInTheDocument();
@@ -46,40 +41,23 @@ it('Product Detail Page - 상품 디테일 클릭시 정보 변경(상세정보 
 
 describe('상품 이미지 캐러셀 테스트', () => {
   it('다음 버튼 클릭시 두번째 이미지로 변경', async () => {
-    const firstImg = screen.getAllByAltText('img-1');
-    expect(firstImg).toBeInTheDocument();
-    expect(screen.getByAltText('img-2')).not.toBeInTheDocument();
+    const firstImg = screen.getByAltText('img-0');
+    expect(firstImg).toHaveClass('active');
+    expect(screen.getByAltText('img-1')).not.toHaveClass('active');
 
     const nextBtn = screen.getByRole('next-img-btn');
-    userEvent.click(nextBtn);
-    expect(await screen.findByAltText('img-2')).toBeInTheDocument();
+    await userEvent.click(nextBtn);
+    expect(await screen.findByAltText('img-1')).toHaveClass('active');
+    expect(await screen.findByAltText('img-0')).not.toHaveClass('active');
+
+    //#2 waitFor사용
+    // await waitFor(() => {
+    //   const secondImg = screen.getByAltText('img-1');
+    //   expect(secondImg).toHaveClass('active');
+    //   expect(firstImg).not.toHaveClass('active');
+    // });
   });
-  it('두번째 이미지에서 이전 버튼 클릭시 첫번째 이미지로 변경', async () => {
-    const nextBtn = screen.getByRole('next-img-btn');
-    userEvent.click(nextBtn);
-    expect(await screen.findByAltText('img-2')).toBeInTheDocument();
-    expect(await screen.findByAltText('img-1')).not.toBeInTheDocument();
-
-    const prevBtn = screen.getByRole('prev-img-btn');
-    userEvent.click(prevBtn);
-    expect(await screen.findByAltText('img-1')).toBeInTheDocument();
-  });
-  it('처음 이미지에서 이전 버튼 클릭시 마지막 이미지로 변경', async () => {
-    const firstImg = screen.getAllByAltText('img-1');
-    expect(firstImg).toBeInTheDocument();
-    expect(screen.getByAltText('img-5')).not.toBeInTheDocument();
-
-    const prevBtn = screen.getByRole('prev-img-btn');
-    userEvent.click(prevBtn);
-
-    expect(await screen.findByAltText('img-5')).toBeInTheDocument();
-  });
-  it('마지막 이미지에서 다음 버튼 클릭시 처음 이미지로 변경', async () => {
-    expect(screen.getByAltText('img-5')).not.toBeInTheDocument();
-
-    const prevBtn = screen.getByRole('prev-img-btn');
-    userEvent.click(prevBtn);
-
-    expect(await screen.findByAltText('img-5')).toBeInTheDocument();
-  });
+  // wait for은 컴포넌트가 업데이트 될때 까지 기다려줌
+  // 근데 find~를 await랑 같이 쓰면 동일하지 않나?
+  // find는 해당 요소가 있을때까지 찾아준다.
 });
