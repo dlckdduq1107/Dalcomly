@@ -32,13 +32,22 @@ function Carousel(props: any) {
 
   return (
     <CarouselWrapper maxWidth={width}>
-      <Button onClick={clickPrevImg} isLeft={true}>{`<`}</Button>
+      <Button role='prev-img-btn' onClick={clickPrevImg} isLeft={true}>{`<`}</Button>
       <ImgWrapper ref={slideRef}>
         {imgPaths.map((imgPath: string, idx: number) => (
-          <Image alt={`detail-img-${idx}`} src={imgPath} width={width} height={height} />
+          <Image
+            alt={`img-${idx}`}
+            className={`${currentImgIndex === idx ? 'active' : ''}`}
+            src={imgPath}
+            width={width}
+            height={height}
+            key={idx}
+          />
         ))}
       </ImgWrapper>
-      <Button onClick={clickNextImg} isLeft={false} imgWidth={width}>{`>`}</Button>
+      <Button role='next-img-btn' onClick={clickNextImg} isLeft={false} imgWidth={width}>
+        {`>`}
+      </Button>
     </CarouselWrapper>
   );
 }
