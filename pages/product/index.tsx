@@ -3,3 +3,11 @@ const ProductPage = (props: any) => {
 };
 
 export default ProductPage;
+
+export async function getStaticProps(props: any) {
+  return {
+    props: {
+      id: 1,
+    },
+  };
+}

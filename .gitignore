@@ -2,7 +2,7 @@
 .DS_Store
 /dist/
 /.next/
-
+/out/
 # local env files
 .env*.local
 
