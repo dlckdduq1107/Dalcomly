@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Carousel from '../../components/carousel';
+import { products } from '../../util/dummyData';
 
 function ProductDetailPage(props: any) {
   const { imgPath, id, productName, price, cautionPath, detailImages } = props;
@@ -60,8 +61,9 @@ function ProductDetailPage(props: any) {
 }
 
 export async function getStaticPaths() {
-  const reponse = await fetch('http://localhost:3000/api/products');
-  const result = await reponse.json();
+  // const reponse = await fetch('http://localhost:3000/api/products');
+  // const result = await reponse.json();
+  const result = products;
   const productPath = result.productList.map((val: any) => {
     return {
       params: {
@@ -77,8 +79,9 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(props: any) {
   const { id } = props.params;
-  const data = await fetch(`http://localhost:3000/api/product/${id}`);
-  const result = await data.json();
+  // const data = await fetch(`http://localhost:3000/api/product/${id}`);
+  // const result = await data.json();
+  const result = products.productList[0];
   return {
     props: {
       id: result.id,

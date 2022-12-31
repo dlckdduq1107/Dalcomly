@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ProductList from '../components/products/productList';
+import { products } from '../util/dummyData';
 import { ProductResponse } from './api/products';
 
 interface ProductResponseWrapper {
@@ -17,9 +18,9 @@ function HomePage(props: any) {
   );
 }
 export async function getStaticProps() {
-  const result = await fetch('http://localhost:3000/api/products');
-  const { productList } = await result.json();
-
+  // const result = await fetch('http://localhost:3000/api/products');
+  // const { productList } = await result.json();
+  const { productList } = products;
   return {
     props: {
       productList,
