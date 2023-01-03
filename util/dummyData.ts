@@ -38,3 +38,11 @@ export const products = {
     },
   ],
 };
+
+export const mainPageImages = {
+  imgPaths: [
+    '/assets/images/puppy.png',
+    '/assets/images/foreground.png',
+    '/assets/images/children.png',
+  ],
+};
