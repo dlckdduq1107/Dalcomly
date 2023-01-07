@@ -12,7 +12,9 @@ function HomePage(props: any) {
   const { productList, imgPaths } = props;
   return (
     <BodyWrapper>
-      <Carousel imgPaths={imgPaths} width={1425} height={445} kind='main' delay={3000} />
+      <CarouselWrapper>
+        <Carousel imgPaths={imgPaths} width={2000} height={500} kind='main' delay={3000} />
+      </CarouselWrapper>
       <ProductList productList={productList} title='금일 hot' />
       <ProductList productList={productList} title='weekly hot items' />
     </BodyWrapper>
@@ -33,3 +35,7 @@ export async function getStaticProps() {
 export default HomePage;
 
 const BodyWrapper = styled.div``;
+const CarouselWrapper = styled.div`
+  padding-left: 10rem;
+  padding-right: 10rem;
+`;
