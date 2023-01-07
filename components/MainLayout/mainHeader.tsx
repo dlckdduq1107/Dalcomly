@@ -33,7 +33,7 @@ const Header = styled.header`
   padding: 20px;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 `;
 const MenuWrapper = styled.div`
   display: flex;
