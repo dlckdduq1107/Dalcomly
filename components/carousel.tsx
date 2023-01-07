@@ -37,6 +37,10 @@ function Carousel(props: any) {
     }
   };
 
+  const clickDot = (idx: number) => {
+    setCurrentImgIndex(idx);
+  };
+
   return (
     <CarouselWrapper maxWidth={width}>
       <Button role='prev-img-btn' onClick={clickPrevImg} isLeft={true}>{`<`}</Button>
@@ -55,6 +59,17 @@ function Carousel(props: any) {
       <Button role='next-img-btn' onClick={clickNextImg} isLeft={false} kind={kind}>
         {`>`}
       </Button>
+      <DotWrapper>
+        {imgPaths.map((path: string, idx: number) => (
+          <Dot
+            className={`${currentImgIndex === idx ? 'active-dot' : 'dot'}`}
+            isFocus={currentImgIndex === idx ? true : false}
+            onClick={() => clickDot(idx)}
+            role={`${kind ? kind + '-' : ''}dot-${idx}`}
+            key={`dot-${idx}`}
+          />
+        ))}
+      </DotWrapper>
     </CarouselWrapper>
   );
 }
@@ -86,4 +101,18 @@ const Button = styled.button<any>`
   top: 47%;
   z-index: 1;
   left: ${(props) => (props.isLeft ? '1%' : props.kind === 'main' ? '96%' : '88%')};
+`;
+const DotWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 4rem;
+  padding-right: 4rem;
+`;
+const Dot = styled.div<any>`
+  background-color: ${(props) => (props.isFocus ? 'gray' : 'white')};
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  margin: 10px;
 `;
