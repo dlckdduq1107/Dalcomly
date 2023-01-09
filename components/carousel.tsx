@@ -1,9 +1,10 @@
 import Image from 'next/future/image';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useInterval } from '../hooks/useInterval';
 
 function Carousel(props: any) {
-  const { imgPaths, width, height } = props;
+  const { imgPaths, width, height, kind, delay } = props;
   const imgCountRef = useRef<number>(imgPaths.length - 1);
   const slideRef = useRef<HTMLDivElement>(null);
 
@@ -13,6 +14,12 @@ function Carousel(props: any) {
     slideRef.current!.style.transition = 'all 0.5s ease-in-out';
     slideRef.current!.style.transform = `translateX(-${currentImgIndex * width}px)`;
   }, [currentImgIndex]);
+
+  if (delay) {
+    useInterval(() => {
+      clickNextImg();
+    }, delay);
+  }
 
   const clickNextImg = () => {
     if (currentImgIndex >= imgCountRef.current) {
@@ -30,6 +37,10 @@ function Carousel(props: any) {
     }
   };
 
+  const clickDot = (idx: number) => {
+    setCurrentImgIndex(idx);
+  };
+
   return (
     <CarouselWrapper maxWidth={width}>
       <Button role='prev-img-btn' onClick={clickPrevImg} isLeft={true}>{`<`}</Button>
@@ -45,9 +56,20 @@ function Carousel(props: any) {
           />
         ))}
       </ImgWrapper>
-      <Button role='next-img-btn' onClick={clickNextImg} isLeft={false} imgWidth={width}>
+      <Button role='next-img-btn' onClick={clickNextImg} isLeft={false} kind={kind}>
         {`>`}
       </Button>
+      <DotWrapper>
+        {imgPaths.map((path: string, idx: number) => (
+          <Dot
+            className={`${currentImgIndex === idx ? 'active-dot' : 'dot'}`}
+            isFocus={currentImgIndex === idx ? true : false}
+            onClick={() => clickDot(idx)}
+            role={`${kind ? kind + '-' : ''}dot-${idx}`}
+            key={`dot-${idx}`}
+          />
+        ))}
+      </DotWrapper>
     </CarouselWrapper>
   );
 }
@@ -55,7 +77,6 @@ export default Carousel;
 
 const CarouselWrapper = styled.div<any>`
   overflow: hidden;
-  width: 50%;
   max-width: ${(props) => props.maxWidth}px;
   min-width: 250px;
   position: relative;
@@ -79,5 +100,19 @@ const Button = styled.button<any>`
   position: absolute;
   top: 47%;
   z-index: 1;
-  left: ${(props) => (props.isLeft ? '1%' : '88%')};
+  left: ${(props) => (props.isLeft ? '1%' : props.kind === 'main' ? '96%' : '88%')};
+`;
+const DotWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 4rem;
+  padding-right: 4rem;
+`;
+const Dot = styled.div<any>`
+  background-color: ${(props) => (props.isFocus ? 'gray' : 'white')};
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  margin: 10px;
 `;

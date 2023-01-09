@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Carousel from '../components/carousel';
 import ProductList from '../components/products/productList';
 import { ProductResponse } from './api/products';
 
@@ -8,9 +9,12 @@ interface ProductResponseWrapper {
 
 //TODO: props타입을 설정해야함
 function HomePage(props: any) {
-  const { productList } = props;
+  const { productList, imgPaths } = props;
   return (
     <BodyWrapper>
+      <CarouselWrapper>
+        <Carousel imgPaths={imgPaths} width={2000} height={500} kind='main' delay={3000} />
+      </CarouselWrapper>
       <ProductList productList={productList} title='금일 hot' />
       <ProductList productList={productList} title='weekly hot items' />
     </BodyWrapper>
@@ -19,13 +23,19 @@ function HomePage(props: any) {
 export async function getStaticProps() {
   const result = await fetch('http://localhost:3000/api/products');
   const { productList } = await result.json();
-
+  const mainImages = await fetch('http://localhost:3000/api/main/images');
+  const { imgPaths } = await mainImages.json();
   return {
     props: {
       productList,
+      imgPaths,
     },
   };
 }
 export default HomePage;
 
 const BodyWrapper = styled.div``;
+const CarouselWrapper = styled.div`
+  padding-left: 10rem;
+  padding-right: 10rem;
+`;

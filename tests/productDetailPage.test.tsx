@@ -96,4 +96,25 @@ describe('상품 이미지 캐러셀 테스트', () => {
 
     expect(await screen.findByAltText('img-0')).toHaveClass('active');
   });
+
+  it('다음 이미지로 넘어갈때 하단의 점도 같이 바뀌어야 한다.', async () => {
+    const firstDot = screen.getByRole('dot-0');
+    expect(firstDot).toHaveClass('active-dot');
+
+    const nextBtn = screen.getByRole('next-img-btn');
+    await userEvent.click(nextBtn);
+
+    const secondDot = await screen.findByRole('dot-1');
+    expect(firstDot).not.toHaveClass('active-dot');
+    expect(secondDot).toHaveClass('active-dot');
+  });
+
+  it('하단 점 클릭시 해당 이미지로 이동', async () => {
+    expect(screen.getByAltText('img-2')).not.toHaveClass('active');
+    const thirdDot = screen.getByRole('dot-2');
+
+    await userEvent.click(thirdDot);
+    const thirdImg = await screen.findByAltText('img-2');
+    expect(thirdImg).toHaveClass('active');
+  });
 });
