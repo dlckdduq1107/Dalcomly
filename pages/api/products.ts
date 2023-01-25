@@ -8,9 +8,10 @@ export interface ProductResponse {
 export interface EachProduct {
   id: number;
   productName: string;
+  price: number;
   mainImagePath: string;
   detailImagePath: string;
-  cautionPath: string;
+  cautionImagePath: string;
   carouselImages: Array<string>;
 }
 
@@ -42,10 +43,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       return {
         id,
         productName: name as string,
-        price,
+        price: price as number,
         mainImagePath: mainImage,
         detailImagePath: detailImage,
-        cautionPath: cautionImage,
+        cautionImagePath: cautionImage,
         carouselImages,
       };
     })
