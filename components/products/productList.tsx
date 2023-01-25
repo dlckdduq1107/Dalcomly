@@ -9,7 +9,7 @@ function ProductList(props: any) {
       <ItemWrapper>
         {productList.map((product: any) => (
           <ProductItem
-            imgPath={product.imgPath}
+            imgPath={product.mainImagePath}
             id={product.id}
             productName={product.productName}
             key={product.id}

@@ -4,18 +4,26 @@ import styled from 'styled-components';
 import Carousel from '../../components/carousel';
 
 function ProductDetailPage(props: any) {
-  const { imgPath, id, productName, price, cautionPath, detailImages } = props;
-  const [productContent, setProductContent] = useState<string>(imgPath);
+  const {
+    mainImagePath,
+    id,
+    productName,
+    price,
+    cautionImagePath,
+    detailImagePath,
+    carouselImages,
+  } = props;
+  const [productContent, setProductContent] = useState<string>(detailImagePath);
   const [selectDetail, setSelectDetail] = useState<string>('detailInfo');
 
   const onClickDetail = (e: React.MouseEvent<HTMLInputElement>) => {
     const text = e.currentTarget.textContent as string;
 
     if (text === '상세정보') {
-      setProductContent(imgPath);
+      setProductContent(detailImagePath);
       setSelectDetail('detailInfo');
     } else if (text === '유의사항') {
-      setProductContent(cautionPath);
+      setProductContent(cautionImagePath);
       setSelectDetail('cautionInfo');
     }
   };
@@ -23,7 +31,7 @@ function ProductDetailPage(props: any) {
   return (
     <ProductDetailWrapper>
       <ProductMainWrapper>
-        <Carousel imgPaths={detailImages} width={450} height={450} />
+        <Carousel imgPaths={carouselImages} width={450} height={450} />
         <ProductDetailText>
           <ProductTitle>{productName}</ProductTitle>
           <ProductPrice>{`${price.toLocaleString('ko-KR')}원`}</ProductPrice>
@@ -63,14 +71,16 @@ export async function getServerSideProps(props: any) {
   const { id } = props.params;
   const data = await fetch(`http://localhost:3000/api/product/${id}`);
   const result = await data.json();
+
   return {
     props: {
       id: result.id,
       productName: result.productName,
-      imgPath: result.imgPath,
       price: result.price,
-      cautionPath: result.cautionPath,
-      detailImages: result.detailImages,
+      mainImagePath: result.mainImagePath,
+      detailImagePath: result.detailImagePath,
+      cautionImagePath: result.cautionImagePath,
+      carouselImages: result.carouselImages,
     },
   };
 }

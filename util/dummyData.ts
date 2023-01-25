@@ -3,10 +3,11 @@ export const products = {
     {
       id: 1,
       productName: 'clothes1',
-      imgPath: '/assets/images/metaRabbit.png',
+      mainImagePath: '/assets/images/metaRabbit.png',
       price: 10000,
-      cautionPath: '/assets/images/testImg2.png',
-      detailImages: [
+      cautionImagePath: '/assets/images/testImg2.png',
+      detailImagePath: '/assets/images/testImg3.png',
+      carouselImages: [
         '/assets/images/testImg2.png',
         '/assets/images/testImg3.png',
         '/assets/images/metaRabbit.png',
@@ -21,10 +22,11 @@ export const products = {
     {
       id: 2,
       productName: 'hat',
-      imgPath: '/assets/images/testImg2.png',
+      mainImagePath: '/assets/images/testImg2.png',
       price: 2000,
-      cautionPath: '/assets/images/metaRabbit.png',
-      detailImages: [
+      cautionImagePath: '/assets/images/metaRabbit.png',
+      detailImagePath: '/assets/images/testImg2.png',
+      carouselImages: [
         '/assets/images/testImg3.png',
         '/assets/images/metaRabbit.png',
         '/assets/images/testImg2.png',
