@@ -12,3 +12,13 @@ export interface EachProduct {
   cautionImagePath: string;
   carouselImages: Array<string>;
 }
+
+export interface ProductDetailProps {
+  id: number;
+  productName: string;
+  price: number;
+  mainImagePath: string;
+  detailImagePath: string;
+  cautionImagePath: string;
+  carouselImages: Array<string>;
+}
