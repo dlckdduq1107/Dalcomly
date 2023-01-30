@@ -25,3 +25,6 @@ export interface ProductDetailProps {
 export interface ProductsResponse {
   productList: Array<EachProduct>;
 }
+export interface MainPageCarouselImages {
+  imgPaths: Array<string>;
+}
