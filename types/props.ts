@@ -28,3 +28,10 @@ export interface ProductsResponse {
 export interface MainPageCarouselImages {
   imgPaths: Array<string>;
 }
+export interface CarouselProps {
+  imgPaths: Array<string>;
+  width: number;
+  height: number;
+  kind: string;
+  delay: number;
+}

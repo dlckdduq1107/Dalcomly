@@ -2,8 +2,9 @@ import Image from 'next/future/image';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useInterval } from '../hooks/useInterval';
+import { CarouselProps } from '../types/props';
 
-function Carousel(props: any) {
+function Carousel(props: CarouselProps) {
   const { imgPaths, width, height, kind, delay } = props;
   const imgCountRef = useRef<number>(imgPaths.length - 1);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -45,7 +46,7 @@ function Carousel(props: any) {
     <CarouselWrapper maxWidth={width}>
       <Button role='prev-img-btn' onClick={clickPrevImg} isLeft={true}>{`<`}</Button>
       <ImgWrapper ref={slideRef}>
-        {imgPaths.map((imgPath: string, idx: number) => (
+        {imgPaths.map((imgPath, idx) => (
           <Image
             alt={`img-${idx}`}
             className={`${currentImgIndex === idx ? 'active' : ''}`}
@@ -60,7 +61,7 @@ function Carousel(props: any) {
         {`>`}
       </Button>
       <DotWrapper>
-        {imgPaths.map((path: string, idx: number) => (
+        {imgPaths.map((imgPath, idx) => (
           <Dot
             className={`${currentImgIndex === idx ? 'active-dot' : 'dot'}`}
             isFocus={currentImgIndex === idx ? true : false}
