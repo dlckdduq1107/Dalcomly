@@ -32,6 +32,6 @@ export interface CarouselProps {
   imgPaths: Array<string>;
   width: number;
   height: number;
-  kind: string;
-  delay: number;
+  kind?: string;
+  delay?: number;
 }
