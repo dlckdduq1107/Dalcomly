@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useInterval } from '../hooks/useInterval';
 import { CarouselProps } from '../types/props';
+import { CarouselButtonProps } from '../types/styled';
 
 function Carousel(props: CarouselProps) {
   const { imgPaths, width, height, kind, delay } = props;
@@ -76,7 +77,7 @@ function Carousel(props: CarouselProps) {
 }
 export default Carousel;
 
-const CarouselWrapper = styled.div<any>`
+const CarouselWrapper = styled.div<{ maxWidth: number }>`
   overflow: hidden;
   max-width: ${(props) => props.maxWidth}px;
   min-width: 250px;
@@ -87,7 +88,7 @@ const CarouselWrapper = styled.div<any>`
 const ImgWrapper = styled.div`
   display: flex;
 `;
-const Button = styled.button<any>`
+const Button = styled.button<CarouselButtonProps>`
   all: unset;
   padding: 0.01em 0.5em 0.2em 0.5em;
   color: coral;
@@ -110,7 +111,7 @@ const DotWrapper = styled.div`
   padding-left: 4rem;
   padding-right: 4rem;
 `;
-const Dot = styled.div<any>`
+const Dot = styled.div<{ isFocus: boolean }>`
   background-color: ${(props) => (props.isFocus ? 'gray' : 'white')};
   border-radius: 100%;
   width: 10px;
