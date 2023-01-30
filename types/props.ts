@@ -22,3 +22,6 @@ export interface ProductDetailProps {
   cautionImagePath: string;
   carouselImages: Array<string>;
 }
+export interface ProductsResponse {
+  productList: Array<EachProduct>;
+}
