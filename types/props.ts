@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface homeProps {
   productList: Array<EachProduct>;
   imgPaths: Array<string>;
@@ -34,4 +36,7 @@ export interface CarouselProps {
   height: number;
   kind?: string;
   delay?: number;
+}
+export interface MainLayoutProps {
+  children: ReactNode;
 }
