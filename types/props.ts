@@ -40,3 +40,8 @@ export interface CarouselProps {
 export interface MainLayoutProps {
   children: ReactNode;
 }
+export interface ProductItemProps {
+  imgPath: string;
+  id: number;
+  productName: string;
+}
