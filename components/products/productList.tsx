@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+import { ProductListProps } from '../../types/props';
 import ProductItem from './productItem';
 
-function ProductList(props: any) {
+function ProductList(props: ProductListProps) {
   const { productList, title } = props;
   return (
     <ProductsWrapper>
       <Title>{title}</Title>
       <ItemWrapper>
-        {productList.map((product: any) => (
+        {productList.map((product) => (
           <ProductItem
             imgPath={product.mainImagePath}
             id={product.id}

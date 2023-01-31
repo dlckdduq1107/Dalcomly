@@ -45,3 +45,7 @@ export interface ProductItemProps {
   id: number;
   productName: string;
 }
+export interface ProductListProps {
+  productList: Array<EachProduct>;
+  title: string;
+}
