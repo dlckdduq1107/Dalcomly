@@ -22,6 +22,8 @@ function MainHeader() {
     </Header>
   );
 }
+export default MainHeader;
+
 const Header = styled.header`
   display: flex;
   width: 100%;
@@ -52,4 +54,3 @@ const SearchInput = styled.input`
   width: 100%;
 `;
 const SearchBtn = styled.button``;
-export default MainHeader;

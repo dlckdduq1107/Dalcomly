@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { ProductItemProps } from '../../types/props';
 
-function ProductItem(props: any) {
+function ProductItem(props: ProductItemProps) {
   const { imgPath, id, productName } = props;
   return (
     <Link href={`/product/${id}`}>

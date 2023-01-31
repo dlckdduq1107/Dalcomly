@@ -2,8 +2,10 @@ import Image from 'next/future/image';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useInterval } from '../hooks/useInterval';
+import { CarouselProps } from '../types/props';
+import { CarouselButtonProps } from '../types/styled';
 
-function Carousel(props: any) {
+function Carousel(props: CarouselProps) {
   const { imgPaths, width, height, kind, delay } = props;
   const imgCountRef = useRef<number>(imgPaths.length - 1);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -45,7 +47,7 @@ function Carousel(props: any) {
     <CarouselWrapper maxWidth={width}>
       <Button role='prev-img-btn' onClick={clickPrevImg} isLeft={true}>{`<`}</Button>
       <ImgWrapper ref={slideRef}>
-        {imgPaths.map((imgPath: string, idx: number) => (
+        {imgPaths.map((imgPath, idx) => (
           <Image
             alt={`img-${idx}`}
             className={`${currentImgIndex === idx ? 'active' : ''}`}
@@ -60,7 +62,7 @@ function Carousel(props: any) {
         {`>`}
       </Button>
       <DotWrapper>
-        {imgPaths.map((path: string, idx: number) => (
+        {imgPaths.map((imgPath, idx) => (
           <Dot
             className={`${currentImgIndex === idx ? 'active-dot' : 'dot'}`}
             isFocus={currentImgIndex === idx ? true : false}
@@ -75,7 +77,7 @@ function Carousel(props: any) {
 }
 export default Carousel;
 
-const CarouselWrapper = styled.div<any>`
+const CarouselWrapper = styled.div<{ maxWidth: number }>`
   overflow: hidden;
   max-width: ${(props) => props.maxWidth}px;
   min-width: 250px;
@@ -86,7 +88,7 @@ const CarouselWrapper = styled.div<any>`
 const ImgWrapper = styled.div`
   display: flex;
 `;
-const Button = styled.button<any>`
+const Button = styled.button<CarouselButtonProps>`
   all: unset;
   padding: 0.01em 0.5em 0.2em 0.5em;
   color: coral;
@@ -109,7 +111,7 @@ const DotWrapper = styled.div`
   padding-left: 4rem;
   padding-right: 4rem;
 `;
-const Dot = styled.div<any>`
+const Dot = styled.div<{ isFocus: boolean }>`
   background-color: ${(props) => (props.isFocus ? 'gray' : 'white')};
   border-radius: 100%;
   width: 10px;

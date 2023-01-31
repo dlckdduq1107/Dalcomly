@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 import Carousel from '../components/carousel';
 import ProductList from '../components/products/productList';
-import { ProductResponse } from './api/products';
+import { homeProps } from '../types/props';
 
-interface ProductResponseWrapper {
-  productList: ProductResponse;
-}
-
-//TODO: props타입을 설정해야함
-function HomePage(props: any) {
+function HomePage(props: homeProps) {
   const { productList, imgPaths } = props;
   return (
     <BodyWrapper>
@@ -25,11 +20,12 @@ export async function getStaticProps() {
   const { productList } = await result.json();
   const mainImages = await fetch('http://localhost:3000/api/main/images');
   const { imgPaths } = await mainImages.json();
+  const resProps: homeProps = {
+    productList,
+    imgPaths,
+  };
   return {
-    props: {
-      productList,
-      imgPaths,
-    },
+    props: resProps,
   };
 }
 export default HomePage;

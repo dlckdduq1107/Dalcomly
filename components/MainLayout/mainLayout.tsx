@@ -1,13 +1,14 @@
 import { Fragment } from 'react';
 import styled from 'styled-components';
+import { MainLayoutProps } from '../../types/props';
 import MainFooter from './mainFooter';
 import MainHeader from './mainHeader';
 
-function MainLayout(props: any) {
+function MainLayout({ children }: MainLayoutProps) {
   return (
     <Fragment>
       <MainHeader />
-      <Main>{props.children}</Main>
+      <Main>{children}</Main>
       <MainFooter />
     </Fragment>
   );

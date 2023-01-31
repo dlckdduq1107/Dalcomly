@@ -2,8 +2,9 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Carousel from '../../components/carousel';
+import { ProductDetailProps } from '../../types/props';
 
-function ProductDetailPage(props: any) {
+function ProductDetailPage(props: ProductDetailProps) {
   const {
     mainImagePath,
     id,

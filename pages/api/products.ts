@@ -1,21 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
+import { ProductsResponse } from '../../types/props';
 
-export interface ProductResponse {
-  productList: Array<EachProduct>;
-}
-export interface EachProduct {
-  id: number;
-  productName: string;
-  price: number;
-  mainImagePath: string;
-  detailImagePath: string;
-  cautionImagePath: string;
-  carouselImages: Array<string>;
-}
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse<ProductResponse>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ProductsResponse>) {
   const prisma = new PrismaClient();
   const product = await prisma.product.findMany();
   const result = await Promise.all(
