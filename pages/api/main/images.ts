@@ -2,7 +2,6 @@
 import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MainPageCarouselImages } from '../../../types/props';
-import { mainPageImages } from '../../../util/dummyData';
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,5 +13,7 @@ export default async function handler(
   const result = {
     imgPaths: resHomeImages.map((eachPath) => eachPath.path),
   };
+  await prisma.$disconnect();
+
   res.status(200).json(result);
 }
