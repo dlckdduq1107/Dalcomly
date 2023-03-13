@@ -44,6 +44,7 @@ export interface ProductItemProps {
   imgPath: string;
   id: number;
   productName: string;
+  price: number;
 }
 export interface ProductListProps {
   productList: Array<EachProduct>;

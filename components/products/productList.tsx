@@ -13,6 +13,7 @@ function ProductList(props: ProductListProps) {
             imgPath={product.mainImagePath}
             id={product.id}
             productName={product.productName}
+            price={product.price}
             key={product.id}
           />
         ))}
