@@ -34,3 +34,11 @@ model HomeImage {
 
   @@map("home_image")
 }
+
+model star {
+  id         Int    @id
+  productid  Int
+  point      Float  @db.Float
+  fromuserid String @db.VarChar(45)
+  orderid    Int
+}
