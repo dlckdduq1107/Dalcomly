@@ -25,7 +25,7 @@ export async function getStaticProps() {
     productList.map(async (val: EachProduct) => {
       const response = await getStartPoint(val.id);
       const result = await response.json();
-      return { ...val, starPoint: result.averStarPoint };
+      return { ...val, averStarPoint: result.averStarPoint };
     })
   );
 

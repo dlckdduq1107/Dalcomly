@@ -14,6 +14,7 @@ function ProductList(props: ProductListProps) {
             id={product.id}
             productName={product.productName}
             price={product.price}
+            averStarPoint={product.averStarPoint}
             key={product.id}
           />
         ))}
