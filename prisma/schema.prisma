@@ -41,4 +41,6 @@ model star {
   point      Float  @db.Float
   fromuserid String @db.VarChar(45)
   orderid    Int
+
+  @@map("star")
 }
