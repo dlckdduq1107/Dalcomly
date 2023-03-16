@@ -13,6 +13,7 @@ export interface EachProduct {
   detailImagePath: string;
   cautionImagePath: string;
   carouselImages: Array<string>;
+  averStarPoint?: number;
 }
 
 export interface ProductDetailProps {
@@ -45,6 +46,7 @@ export interface ProductItemProps {
   id: number;
   productName: string;
   price: number;
+  averStarPoint?: number | null;
 }
 export interface ProductListProps {
   productList: Array<EachProduct>;
