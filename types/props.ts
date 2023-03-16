@@ -50,3 +50,6 @@ export interface ProductListProps {
   productList: Array<EachProduct>;
   title: string;
 }
+export interface StarAver {
+  averStarPoint: number;
+}
