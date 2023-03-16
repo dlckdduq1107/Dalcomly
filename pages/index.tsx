@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Carousel from '../components/carousel';
 import ProductList from '../components/products/productList';
-import { homeProps } from '../types/props';
+import { EachProduct, homeProps } from '../types/props';
 
 function HomePage(props: homeProps) {
   const { productList, imgPaths } = props;
@@ -20,10 +20,20 @@ export async function getStaticProps() {
   const { productList } = await result.json();
   const mainImages = await fetch('http://localhost:3000/api/main/images');
   const { imgPaths } = await mainImages.json();
+
+  const cpyProfuctList = await Promise.all(
+    productList.map(async (val: EachProduct) => {
+      const response = await getStartPoint(val.id);
+      const result = await response.json();
+      return { ...val, starPoint: result.averStarPoint };
+    })
+  );
+
   const resProps: homeProps = {
-    productList,
+    productList: cpyProfuctList,
     imgPaths,
   };
+
   return {
     props: resProps,
   };
@@ -35,3 +45,8 @@ const CarouselWrapper = styled.div`
   padding-left: 10rem;
   padding-right: 10rem;
 `;
+
+const getStartPoint = async (productId: number) => {
+  const response = await fetch(`http://localhost:3000/api/stars/${productId}`);
+  return response;
+};
