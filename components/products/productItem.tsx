@@ -23,13 +23,14 @@ function ProductItem(props: ProductItemProps) {
             <div>{price.toLocaleString()}원</div>
             {averStarPoint !== null &&
               getStarList(Math.floor(averStarPoint as number)).map((val, idx) => (
-                <Image src='/assets/images/fullstar.png' width={20} height={20} key={idx} />
+                <Image src='/assets/images/fullstar.png' width={17} height={17} key={idx} />
               ))}
             {averStarPoint !== null &&
               (averStarPoint as number) - Math.floor(averStarPoint as number) >= 0.5 && (
-                <Image src='/assets/images/halfstar.png' width={20} height={20} />
+                <Image src='/assets/images/halfstar.png' width={17} height={17} />
               )}
           </ItemWrapper>
+          {averStarPoint?.toFixed(2)}
         </ProductItemWrapper>
       </a>
     </Link>
@@ -37,5 +38,7 @@ function ProductItem(props: ProductItemProps) {
 }
 export default ProductItem;
 
-const ProductItemWrapper = styled.div``;
+const ProductItemWrapper = styled.div`
+  margin: 5%;
+`;
 const ItemWrapper = styled.div``;
