@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse<MainPageCarouselImages>
 ) {
   const prisma = new PrismaClient();
-  const resHomeImages = await prisma.homeImage.findMany();
+  const resHomeImages = await prisma.home_image.findMany();
 
   const result = {
     imgPaths: resHomeImages.map((eachPath) => eachPath.path),

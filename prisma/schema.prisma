@@ -8,31 +8,30 @@ datasource db {
   relationMode = "prisma"
 }
 
+model HomeImage {
+  id   Int    @id
+  path String @db.VarChar(45)
+
+    @@map("home_image")
+}
+
 model Image {
-  id        Int      @id
+  id        Int     @id
   productid Int?
-  path      String?  @db.VarChar(45)
-  kind      String?  @db.VarChar(45)
-  product   Product? @relation(fields: [productid], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "id")
+  path      String? @db.VarChar(45)
+  kind      String? @db.VarChar(45)
 
   @@index([productid], map: "id_idx")
   @@map("image")
 }
 
 model Product {
-  id    Int     @id
-  name  String? @db.VarChar(45)
-  price Int?
-  image Image[]
+  id     Int     @id
+  name   String? @db.VarChar(45)
+  price  Int?
+  option String? @db.VarChar(45)
 
   @@map("product")
-}
-
-model HomeImage {
-  id   Int    @id
-  path String @db.VarChar(45)
-
-  @@map("home_image")
 }
 
 model star {
