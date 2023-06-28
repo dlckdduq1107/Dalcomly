@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Carousel from '../../components/carousel';
-import { ProductDetailProps } from '../../types/props';
+import { EachOption, ProductDetailProps } from '../../types/props';
 
 function ProductDetailPage(props: ProductDetailProps) {
   const {
@@ -13,9 +13,11 @@ function ProductDetailPage(props: ProductDetailProps) {
     cautionImagePath,
     detailImagePath,
     carouselImages,
+    option,
   } = props;
   const [productContent, setProductContent] = useState<string>(detailImagePath);
   const [selectDetail, setSelectDetail] = useState<string>('detailInfo');
+  const [options, setOptions] = useState<EachOption>({});
 
   const onClickDetail = (e: React.MouseEvent<HTMLInputElement>) => {
     const text = e.currentTarget.textContent as string;
@@ -29,6 +31,10 @@ function ProductDetailPage(props: ProductDetailProps) {
     }
   };
 
+  const onChangeSelect = (e: any, key: string) => {
+    setOptions({ ...options, [key]: e.target.value });
+  };
+
   return (
     <ProductDetailWrapper>
       <ProductMainWrapper>
@@ -36,7 +42,23 @@ function ProductDetailPage(props: ProductDetailProps) {
         <ProductDetailText>
           <ProductTitle>{productName}</ProductTitle>
           <ProductPrice>{`${price.toLocaleString('ko-KR')}원`}</ProductPrice>
-          <OptionWrapper>options</OptionWrapper>
+          <OptionWrapper>
+            <label htmlFor='size-select'>size:</label>
+            <SizeSelect
+              id='size-select'
+              defaultValue='none'
+              onChange={(e) => onChangeSelect(e, 'size')}
+            >
+              <option value='none' hidden disabled>
+                select size
+              </option>
+              {option?.size?.map((val) => (
+                <option value={val} key={val}>
+                  {val}
+                </option>
+              ))}
+            </SizeSelect>
+          </OptionWrapper>
           <BtnWrapper>
             <BuyBtn role='buy-btn'>구매하기</BuyBtn>
             <CartBtn role='cart-btn'>장바구니</CartBtn>
@@ -82,6 +104,7 @@ export async function getServerSideProps(props: any) {
       detailImagePath: result.detailImagePath,
       cautionImagePath: result.cautionImagePath,
       carouselImages: result.carouselImages,
+      option: result.option,
     },
   };
 }
@@ -146,3 +169,4 @@ const Caution = styled.div`
   padding: 20px;
   background-color: ${(props) => props.color || 'gray'};
 `;
+const SizeSelect = styled.select``;

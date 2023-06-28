@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { EachProduct } from '../../../types/props';
+import { EachOption, EachProduct } from '../../../types/props';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<EachProduct>) {
   const { id } = req.query;
@@ -41,6 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     detailImagePath: detailImage,
     cautionImagePath: cautionImage,
     carouselImages: carouselImages,
+    option: JSON.parse(targetProduct?.option as string) as EachOption,
   };
   res.status(200).json(result);
 }

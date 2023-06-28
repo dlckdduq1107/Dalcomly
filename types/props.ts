@@ -14,6 +14,10 @@ export interface EachProduct {
   cautionImagePath: string;
   carouselImages: Array<string>;
   averStarPoint?: number;
+  option?: EachOption;
+}
+export interface EachOption {
+  size?: Array<number | string>;
 }
 
 export interface ProductDetailProps {
@@ -24,6 +28,7 @@ export interface ProductDetailProps {
   detailImagePath: string;
   cautionImagePath: string;
   carouselImages: Array<string>;
+  option?: EachOption;
 }
 export interface ProductsResponse {
   productList: Array<EachProduct>;
